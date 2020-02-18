@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canavar Avı</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+    <section class="row">
+        <div class="small-6 columns">
+            <h3 class="text-center">user</h1>
+            <div class="healthbar">
+                <div :style="player_Progress" class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+                    {{player_heal }}%
+                </div>
+            </div>
+        </div>
+        <div class="small-6 columns">
+            <h3 class="text-center">python</h1>
+            <div class="healthbar">
+                <div :style="monster_Progress" class="healthbar text-center" style="background-color: green; margin: 0; color: white;">
+                   {{ monster_heal }}%
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="row controls" v-if="!game_is_on">
+        <div class="small-12 columns">
+            <button id="start-game" v-on:click="start_game">new game</button>
+        </div>
+    </section>
+
+    <section class="row controls" v-if="game_is_on">
+        <div class="small-12 columns">
+            <button id="attack" v-on:click="attack">attack</button>
+            <button id="special-attack" v-on:click="meele_attack">meele attack</button>
+            <button id="heal" v-on:click="heal_up">healt</button>
+            <button id="give-up" v-on:click="give_up">give up!</button>
+        </div>
+    </section>
+ 
+    <section class="row log" v-if="logs.length>0">
+        <div class="small-12 columns">
+            <ul>
+                <li v-bind:class="{'player-turn' : log.turn=='p' , 'monster-turn' : log.turn=='m'}" v-for="log in logs">
+                    {{log.text}}
+                </li>
+            </ul>
+        </div>
+    </section>
+
+</div>
+
+<script src="../VueJsGame/app.js"></script>
+</body>
+</html>
